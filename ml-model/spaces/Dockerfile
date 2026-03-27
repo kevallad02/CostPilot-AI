@@ -7,6 +7,7 @@ RUN pip install --no-cache-dir -r requirements.txt
 
 COPY main.py .
 COPY predictor.py .
+COPY validator.py .
 
 ENV PORT=7860
 EXPOSE 7860
