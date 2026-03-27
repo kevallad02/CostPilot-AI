@@ -1,8 +1,14 @@
 const { Pool } = require('pg');
+const dns = require('dns');
+
+// Force IPv4 for all DNS lookups – fixes Render → Supabase IPv6 routing failure.
+// Supabase's direct host (db.*.supabase.co) resolves to IPv6 on Render's network;
+// the pooler host (*.pooler.supabase.com) is IPv4-only and is the preferred URL.
+dns.setDefaultResultOrder('ipv4first');
 
 // Supabase provides a connection string – prefer that over individual vars.
-// Transaction mode (port 6543, pgbouncer): good for serverless/short-lived connections.
-// Session mode  (port 5432):               required if you use prepared statements.
+// Use the Transaction Pooler string (port 6543) from Supabase Dashboard:
+//   Project Settings → Database → Connection pooling → Transaction mode
 const pool = new Pool(
   process.env.DATABASE_URL
     ? {
