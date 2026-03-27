@@ -5,6 +5,7 @@ Falls back to rule-based parser if model output is invalid JSON.
 """
 
 import json
+import os
 import re
 import logging
 from pathlib import Path
@@ -17,7 +18,12 @@ _tokenizer = None
 _model = None
 
 MODEL_DIR = Path(__file__).parent.parent / "models" / "cost-parser"
-FALLBACK_MODEL_NAME = "google/flan-t5-small"  # used if fine-tuned model not found
+
+# HF Hub repo ID of your fine-tuned model (set via env var on HF Spaces)
+# e.g. "your-hf-username/costpilot-cost-parser"
+HF_MODEL_REPO = os.environ.get("HF_MODEL_REPO", "")
+
+FALLBACK_MODEL_NAME = "google/flan-t5-small"  # used if neither local nor HF Hub
 
 MAX_INPUT_LENGTH = 128
 MAX_TARGET_LENGTH = 128
@@ -80,7 +86,12 @@ def _load_model():
 
     from transformers import T5ForConditionalGeneration, T5Tokenizer
 
-    model_path = MODEL_DIR if MODEL_DIR.exists() else FALLBACK_MODEL_NAME
+    if MODEL_DIR.exists():
+        model_path = str(MODEL_DIR)
+    elif HF_MODEL_REPO:
+        model_path = HF_MODEL_REPO   # loads directly from HF Hub
+    else:
+        model_path = FALLBACK_MODEL_NAME
     logger.info("Loading model from: %s", model_path)
 
     _tokenizer = T5Tokenizer.from_pretrained(str(model_path))

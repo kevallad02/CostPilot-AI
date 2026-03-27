@@ -4,6 +4,7 @@ Exposes POST /parse-input → structured JSON for construction queries.
 """
 
 import logging
+import os
 import sys
 from pathlib import Path
 from typing import Optional
@@ -98,4 +99,6 @@ def parse_input(req: ParseRequest):
 
 # ─────────────────────────────── Entry ─────────────────────────────────────
 if __name__ == "__main__":
-    uvicorn.run("main:app", host="0.0.0.0", port=8001, reload=False, workers=1)
+    # HF Spaces requires port 7860; local dev uses 8001
+    port = int(os.environ.get("PORT", 8001))
+    uvicorn.run("main:app", host="0.0.0.0", port=port, reload=False, workers=1)
