@@ -5,8 +5,6 @@ Exposes POST /parse-input → structured JSON for construction queries.
 
 import logging
 import os
-import sys
-from pathlib import Path
 from typing import Optional
 
 from contextlib import asynccontextmanager
@@ -16,9 +14,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel, field_validator
 import uvicorn
 
-# Allow importing predictor from sibling directory
-sys.path.insert(0, str(Path(__file__).parent.parent))
-from inference.predictor import predict, _load_model
+from predictor import predict, _load_model
 
 
 @asynccontextmanager
