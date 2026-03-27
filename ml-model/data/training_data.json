@@ -1,0 +1,134 @@
+[
+  {
+    "input_text": "Parse construction query: Estimate 20 cubic meter concrete",
+    "target_text": "{\"action\": \"estimate\", \"item\": \"concrete\", \"quantity\": 20, \"unit\": \"m3\"}"
+  },
+  {
+    "input_text": "Parse construction query: Add 500 kg steel",
+    "target_text": "{\"action\": \"add\", \"item\": \"steel\", \"quantity\": 500, \"unit\": \"kg\"}"
+  },
+  {
+    "input_text": "Parse construction query: What is the total cost?",
+    "target_text": "{\"action\": \"total\", \"item\": null, \"quantity\": null, \"unit\": null}"
+  },
+  {
+    "input_text": "Parse construction query: Give me the summary",
+    "target_text": "{\"action\": \"summary\", \"item\": null, \"quantity\": null, \"unit\": null}"
+  },
+  {
+    "input_text": "Parse construction query: Calculate cost for 15 m3 cement",
+    "target_text": "{\"action\": \"estimate\", \"item\": \"cement\", \"quantity\": 15, \"unit\": \"m3\"}"
+  },
+  {
+    "input_text": "Parse construction query: Add 200 bags of cement",
+    "target_text": "{\"action\": \"add\", \"item\": \"cement\", \"quantity\": 200, \"unit\": \"bags\"}"
+  },
+  {
+    "input_text": "Parse construction query: How much will 50 tonnes of steel cost?",
+    "target_text": "{\"action\": \"estimate\", \"item\": \"steel\", \"quantity\": 50, \"unit\": \"tonnes\"}"
+  },
+  {
+    "input_text": "Parse construction query: Include 1000 bricks",
+    "target_text": "{\"action\": \"add\", \"item\": \"brick\", \"quantity\": 1000, \"unit\": \"pieces\"}"
+  },
+  {
+    "input_text": "Parse construction query: What will 30 cubic meters of sand cost?",
+    "target_text": "{\"action\": \"estimate\", \"item\": \"sand\", \"quantity\": 30, \"unit\": \"m3\"}"
+  },
+  {
+    "input_text": "Parse construction query: Show me the breakdown",
+    "target_text": "{\"action\": \"summary\", \"item\": null, \"quantity\": null, \"unit\": null}"
+  },
+  {
+    "input_text": "Parse construction query: Price for 100 sq meters of tiles",
+    "target_text": "{\"action\": \"estimate\", \"item\": \"tiles\", \"quantity\": 100, \"unit\": \"sq_m\"}"
+  },
+  {
+    "input_text": "Parse construction query: Add 75 kg gravel",
+    "target_text": "{\"action\": \"add\", \"item\": \"gravel\", \"quantity\": 75, \"unit\": \"kg\"}"
+  },
+  {
+    "input_text": "Parse construction query: Estimate cost of 10 m3 concrete",
+    "target_text": "{\"action\": \"estimate\", \"item\": \"concrete\", \"quantity\": 10, \"unit\": \"m3\"}"
+  },
+  {
+    "input_text": "Parse construction query: Total project cost please",
+    "target_text": "{\"action\": \"total\", \"item\": null, \"quantity\": null, \"unit\": null}"
+  },
+  {
+    "input_text": "Parse construction query: Add 250 liters of paint",
+    "target_text": "{\"action\": \"add\", \"item\": \"paint\", \"quantity\": 250, \"unit\": \"liters\"}"
+  },
+  {
+    "input_text": "Parse construction query: How much for 5 tonnes of gravel?",
+    "target_text": "{\"action\": \"estimate\", \"item\": \"gravel\", \"quantity\": 5, \"unit\": \"tonnes\"}"
+  },
+  {
+    "input_text": "Parse construction query: Include 300 square meters of glass",
+    "target_text": "{\"action\": \"add\", \"item\": \"glass\", \"quantity\": 300, \"unit\": \"sq_m\"}"
+  },
+  {
+    "input_text": "Parse construction query: Estimate 40 m3 sand",
+    "target_text": "{\"action\": \"estimate\", \"item\": \"sand\", \"quantity\": 40, \"unit\": \"m3\"}"
+  },
+  {
+    "input_text": "Parse construction query: What is my current total?",
+    "target_text": "{\"action\": \"total\", \"item\": null, \"quantity\": null, \"unit\": null}"
+  },
+  {
+    "input_text": "Parse construction query: Add 2000 pieces of brick",
+    "target_text": "{\"action\": \"add\", \"item\": \"brick\", \"quantity\": 2000, \"unit\": \"pieces\"}"
+  },
+  {
+    "input_text": "Parse construction query: Cost for 8 cubic meters of concrete",
+    "target_text": "{\"action\": \"estimate\", \"item\": \"concrete\", \"quantity\": 8, \"unit\": \"m3\"}"
+  },
+  {
+    "input_text": "Parse construction query: Show total amount",
+    "target_text": "{\"action\": \"total\", \"item\": null, \"quantity\": null, \"unit\": null}"
+  },
+  {
+    "input_text": "Parse construction query: Add 120 sq meters of tiles",
+    "target_text": "{\"action\": \"add\", \"item\": \"tiles\", \"quantity\": 120, \"unit\": \"sq_m\"}"
+  },
+  {
+    "input_text": "Parse construction query: Give cost estimate for 1000 kg steel",
+    "target_text": "{\"action\": \"estimate\", \"item\": \"steel\", \"quantity\": 1000, \"unit\": \"kg\"}"
+  },
+  {
+    "input_text": "Parse construction query: Project summary",
+    "target_text": "{\"action\": \"summary\", \"item\": null, \"quantity\": null, \"unit\": null}"
+  },
+  {
+    "input_text": "Parse construction query: Include 50 liters of paint",
+    "target_text": "{\"action\": \"add\", \"item\": \"paint\", \"quantity\": 50, \"unit\": \"liters\"}"
+  },
+  {
+    "input_text": "Parse construction query: Estimate 25 sq meters of wood",
+    "target_text": "{\"action\": \"estimate\", \"item\": \"wood\", \"quantity\": 25, \"unit\": \"sq_m\"}"
+  },
+  {
+    "input_text": "Parse construction query: What will 100 bags of cement cost?",
+    "target_text": "{\"action\": \"estimate\", \"item\": \"cement\", \"quantity\": 100, \"unit\": \"bags\"}"
+  },
+  {
+    "input_text": "Parse construction query: Add 60 m3 gravel",
+    "target_text": "{\"action\": \"add\", \"item\": \"gravel\", \"quantity\": 60, \"unit\": \"m3\"}"
+  },
+  {
+    "input_text": "Parse construction query: Tell me everything I have added so far",
+    "target_text": "{\"action\": \"summary\", \"item\": null, \"quantity\": null, \"unit\": null}"
+  },
+  {
+    "input_text": "Parse construction query: Price estimate for 500 pieces of glass",
+    "target_text": "{\"action\": \"estimate\", \"item\": \"glass\", \"quantity\": 500, \"unit\": \"pieces\"}"
+  },
+  {
+    "input_text": "Parse construction query: Add 35 cubic meters of concrete",
+    "target_text": "{\"action\": \"add\", \"item\": \"concrete\", \"quantity\": 35, \"unit\": \"m3\"}"
+  },
+  {
+    "input_text": "Parse construction query: How much would 80 sq m of wood flooring cost?",
+    "target_text": "{\"action\": \"estimate\", \"item\": \"wood\", \"quantity\": 80, \"unit\": \"sq_m\"}"
+  }
+]

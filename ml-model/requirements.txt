@@ -1,0 +1,10 @@
+torch>=2.9.0
+transformers>=4.44.0
+datasets>=2.20.0
+evaluate>=0.4.2
+rouge_score>=0.1.2
+sentencepiece>=0.2.0
+accelerate>=0.33.0
+fastapi>=0.111.0
+uvicorn[standard]>=0.29.0
+pydantic>=2.7.1
