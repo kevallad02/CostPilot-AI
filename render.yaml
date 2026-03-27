@@ -1,0 +1,23 @@
+services:
+  - type: web
+    name: costpilot-backend
+    runtime: node
+    rootDir: backend
+    buildCommand: npm install
+    startCommand: npm start
+    plan: free
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 3001
+      - key: LOG_LEVEL
+        value: info
+      - key: DATABASE_URL
+        sync: false          # set manually in Render dashboard
+      - key: ML_API_URL
+        sync: false          # set to your ML service URL once deployed
+      - key: ML_TIMEOUT_MS
+        value: 30000
+      - key: CORS_ORIGIN
+        sync: false          # set to your frontend URL (e.g. https://your-app.vercel.app)
