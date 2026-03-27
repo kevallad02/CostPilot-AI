@@ -11,7 +11,7 @@ from huggingface_hub import HfApi
 MODEL_DIR = Path(__file__).parent.parent / "models" / "cost-parser"
 
 # ── Config – edit these ───────────────────────────────────────────────────────
-HF_USERNAME = "your-hf-username"          # your HuggingFace username
+HF_USERNAME = "kevallad"          # your HuggingFace username
 REPO_NAME   = "costpilot-cost-parser"     # repo name on HF Hub
 PRIVATE     = True                         # set False to make it public
 # ─────────────────────────────────────────────────────────────────────────────
