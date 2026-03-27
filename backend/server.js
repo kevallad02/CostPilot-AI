@@ -1,5 +1,9 @@
 require('dotenv').config();
 
+// Force IPv4 DNS resolution – fixes Render → Supabase IPv6 connectivity issue
+const dns = require('dns');
+dns.setDefaultResultOrder('ipv4first');
+
 const express = require('express');
 const cors = require('cors');
 const helmet = require('helmet');
