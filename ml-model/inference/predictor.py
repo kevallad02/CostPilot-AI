@@ -94,10 +94,13 @@ def _load_model():
         model_path = FALLBACK_MODEL_NAME
     logger.info("Loading model from: %s", model_path)
 
-    _tokenizer = T5Tokenizer.from_pretrained(str(model_path))
+    hf_token = os.environ.get("HF_TOKEN") or None  # needed for private repos
+
+    _tokenizer = T5Tokenizer.from_pretrained(str(model_path), token=hf_token)
     _model = T5ForConditionalGeneration.from_pretrained(
         str(model_path),
         tie_word_embeddings=False,  # suppress tied-weights warning
+        token=hf_token,
     )
     _model.eval()
     logger.info("Model loaded successfully.")
