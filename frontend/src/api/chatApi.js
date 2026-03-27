@@ -1,9 +1,15 @@
 import axios from 'axios';
 
+// In dev: Vite proxy rewrites /api → localhost:3001 (vite.config.js)
+// In production: VITE_API_URL points to the deployed backend
+const baseURL = import.meta.env.VITE_API_URL
+  ? `${import.meta.env.VITE_API_URL}/api`
+  : '/api';
+
 const api = axios.create({
-  baseURL: '/api',
+  baseURL,
   headers: { 'Content-Type': 'application/json' },
-  timeout: 15000,
+  timeout: 35000, // allow for Render cold-start (~30s on free tier)
 });
 
 /**
