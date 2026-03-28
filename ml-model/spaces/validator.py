@@ -165,6 +165,34 @@ def validate_action(raw: dict) -> dict:
     }
 
 
+def _repair_t5_output(raw: str) -> str:
+    """
+    T5's sentencepiece tokenizer silently drops { and }.
+    The model consistently outputs:
+      "actions":["action":"add_item","item":"x","quantity":1,"unit":"u"]
+    This repairs it to valid JSON:
+      {"actions":[{"action":"add_item","item":"x","quantity":1,"unit":"u"}]}
+    """
+    s = raw.strip()
+
+    # Only attempt repair when the output looks like T5's brace-stripped format
+    if not re.match(r'^"actions"\s*:\s*\[', s):
+        return raw
+
+    bracket_start = s.index('[')
+    bracket_end = s.rindex(']')
+    array_content = s[bracket_start + 1:bracket_end].strip()
+
+    if not array_content:
+        return '{"actions":[]}'
+
+    # Split on commas that immediately precede "action": — each is a new action entry
+    parts = re.split(r',\s*(?="action"\s*:)', array_content)
+    action_objects = ['{' + part.strip().strip(',') + '}' for part in parts if part.strip()]
+
+    return '{"actions":[' + ','.join(action_objects) + ']}'
+
+
 def validate(raw_text: str) -> dict:
     """
     Full validation pipeline.
@@ -174,10 +202,16 @@ def validate(raw_text: str) -> dict:
     # 1. Strip markdown code fences if present
     clean = re.sub(r"```json\s*|\s*```", "", raw_text).strip()
 
-    # 2. Parse JSON
-    try:
-        parsed = json.loads(clean)
-    except (json.JSONDecodeError, ValueError):
+    # 2. Parse JSON (direct, then with T5 brace-repair fallback)
+    parsed = None
+    for candidate in (clean, _repair_t5_output(clean)):
+        try:
+            parsed = json.loads(candidate)
+            break
+        except (json.JSONDecodeError, ValueError):
+            continue
+
+    if parsed is None:
         return ERROR_OUTPUT.copy()
 
     # 3. Must be a dict with "actions" list
@@ -205,7 +239,7 @@ def validate(raw_text: str) -> dict:
 # ── Quick self-test ───────────────────────────────────────────────────────────
 if __name__ == "__main__":
     tests = [
-        # Valid
+        # Valid – normal JSON
         ('{"actions":[{"action":"add_item","item":"concrete","quantity":10,"unit":"cubic yards"}]}',
          "normalise unit"),
         ('{"actions":[{"action":"estimate","item":"drywall","quantity":"five hundred","unit":"sqft"}]}',
@@ -214,6 +248,13 @@ if __name__ == "__main__":
          "summary"),
         ('{"actions":[{"action":"add_item","item":"steel rebar","quantity":200,"unit":"lbs"},{"action":"add_item","item":"concrete","quantity":15,"unit":"cy"}]}',
          "multi-item"),
+        # Valid – T5 brace-stripped format (repaired automatically)
+        ('"actions":["action":"add_item","item":"concrete","quantity":10,"unit":"cubic_yards"]',
+         "T5 output: single item"),
+        ('"actions":["action":"add_item","item":"concrete","quantity":10,"unit":"cubic_yards","action":"add_item","item":"steel rebar","quantity":200,"unit":"pounds"]',
+         "T5 output: multi-item"),
+        ('"actions":["action":"get_summary"]',
+         "T5 output: get_summary"),
         # Error cases
         ('not json at all',                                       "bad JSON"),
         ('{"actions":[{"action":"fly","item":"x","quantity":1,"unit":"sqft"}]}', "invalid action"),
