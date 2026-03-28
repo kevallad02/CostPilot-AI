@@ -24,7 +24,7 @@ def main():
     print(f"Uploading to: https://huggingface.co/{repo_id}")
 
     tokenizer = T5Tokenizer.from_pretrained(str(MODEL_DIR))
-    model     = T5ForConditionalGeneration.from_pretrained(str(MODEL_DIR), tie_word_embeddings=False)
+    model     = T5ForConditionalGeneration.from_pretrained(str(MODEL_DIR))
 
     tokenizer.push_to_hub(repo_id, private=PRIVATE)
     model.push_to_hub(repo_id, private=PRIVATE)

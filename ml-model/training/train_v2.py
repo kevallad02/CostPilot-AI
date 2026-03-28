@@ -90,7 +90,7 @@ def build_compute_metrics(tokenizer):
 def main():
     logger.info("Model: %s", MODEL_NAME)
     tokenizer = T5Tokenizer.from_pretrained(MODEL_NAME)
-    model     = T5ForConditionalGeneration.from_pretrained(MODEL_NAME, tie_word_embeddings=False)
+    model     = T5ForConditionalGeneration.from_pretrained(MODEL_NAME)
 
     logger.info("Dataset: %s", DATA_PATH)
     dataset  = load_data(DATA_PATH)
@@ -107,11 +107,12 @@ def main():
     args = Seq2SeqTrainingArguments(
         output_dir=str(OUTPUT_DIR),
         num_train_epochs=20,
-        per_device_train_batch_size=16,
-        per_device_eval_batch_size=16,
-        warmup_steps=200,
+        per_device_train_batch_size=8,
+        per_device_eval_batch_size=8,
+        warmup_steps=500,
         weight_decay=0.01,
-        learning_rate=3e-4,
+        learning_rate=5e-5,
+        max_grad_norm=1.0,
         predict_with_generate=True,
         generation_max_length=MAX_TARGET,
         eval_strategy="epoch",
@@ -149,7 +150,7 @@ def main():
     sys.path.insert(0, str(Path(__file__).parent.parent / "inference"))
     from validator import validate
 
-    smoke = T5ForConditionalGeneration.from_pretrained(str(OUTPUT_DIR), tie_word_embeddings=False).to("cpu")
+    smoke = T5ForConditionalGeneration.from_pretrained(str(OUTPUT_DIR)).to("cpu")
     smoke.eval()
     tests = [
         "Parse US construction query: Add 10 cubic yards of concrete",
