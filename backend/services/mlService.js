@@ -12,7 +12,7 @@ const ML_TIMEOUT_MS = parseInt(process.env.ML_TIMEOUT_MS || '5000', 10);
 /**
  * Parse a natural language construction query.
  * @param {string} text – raw user input
- * @returns {Promise<{action, item, quantity, unit, fallback_used}>}
+ * @returns {Promise<{actions: Array<{action: string, item?: string, quantity?: number, unit?: string}>, fallback_used: boolean}>}
  */
 async function parseQuery(text) {
   const response = await axios.post(

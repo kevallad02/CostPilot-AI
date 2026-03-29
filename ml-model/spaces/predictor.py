@@ -15,7 +15,9 @@ logger = logging.getLogger(__name__)
 _tokenizer = None
 _model     = None
 
-MODEL_DIR     = Path(__file__).parent / "models" / "cost-parser-v2"
+# Local: ml-model/models/cost-parser-v2  (one dir up from spaces/)
+# HF Space: loaded from Hub when local dir absent
+MODEL_DIR     = Path(__file__).parent.parent / "models" / "cost-parser-v2"
 HF_MODEL_REPO = os.environ.get("HF_MODEL_REPO", "kevallad/costpilot-cost-parser-v2")
 MAX_INPUT     = 192
 MAX_TARGET    = 320
@@ -35,7 +37,7 @@ def _load_model():
     logger.info("Loading model from: %s", path)
     _tokenizer = T5Tokenizer.from_pretrained(path, token=hf_token)
     _model     = T5ForConditionalGeneration.from_pretrained(
-        path, tie_word_embeddings=False, token=hf_token
+        path, token=hf_token
     )
     _model.eval()
     logger.info("Model ready.")
